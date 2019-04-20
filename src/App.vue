@@ -1,8 +1,7 @@
 <template>
   <div id="main">
     <div id="preview">
-     <div id="plot"></div>
-     <button @click="foo">Foo!</button>
+     <detector-plot></detector-plot>
     </div>
     <div id="controls">
       <controls
@@ -54,8 +53,8 @@ li > * {
 </style>
 
 <script>
-import Controls from "./components/Controls.vue"
-import Plotly from 'plotly.js-dist';
+import Controls from "./components/Controls.vue";
+import DetectorPlot from "./components/DetectorPlot.vue";
 import { DateTime } from 'luxon';
 import Vue from 'vue';
 
@@ -71,30 +70,13 @@ Vue.use((Vue) => {
   };
 });
 
-function foo() {
-  let TESTER = document.getElementById('plot');
-  Plotly.plot( TESTER, [{
-  x: [1, 2, 3, 4, 5],
-  y: [1, 2, 4, 8, 16] }], {
-  margin: { t: 0 } } );
-}
-
-function patchPlan(plan, planPatch) {
-  for (var key in planPatch) {
-    if (typeof planPatch[key] === "object" && Object.keys(planPatch[key]).length !== 0) {
-      patchPlan(plan[key], planPatch[key])
-    } else {
-      plan[key] = planPatch[key];
-    }
-  }
-}
 
 export default {
   components: {
-    Controls
+    Controls,
+    DetectorPlot
   },
   methods: {
-    foo,
     applyPreset: function (presetData) {
       patchPlan(this.plan, presetData)
     },
