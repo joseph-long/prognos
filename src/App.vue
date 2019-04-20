@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     applyPreset: function (presetData) {
-      patchPlan(this.plan, presetData)
+      this.patchPlan(this.plan, presetData)
     },
     appendCompanion: function () {
       console.log("Add companion...");
@@ -90,10 +90,14 @@ export default {
     },
     updateFromHash: function () {
       if (window.location.hash.length > 1) {
-        let injectplan = JSON.parse(decodeURIComponent(window.location.hash.slice(1)));
-        console.log(injectplan);
-        patchPlan(this.plan, injectplan);
+        let injectPlan = JSON.parse(decodeURIComponent(window.location.hash.slice(1)));
+        this.patchPlan(this.plan, injectPlan);
         console.log(this.plan);
+      }
+    },
+    patchPlan: function patchPlan(plan, planPatch) {
+      for (var key in planPatch) {
+        this.$set(this.plan, key, planPatch[key]);
       }
     }
   },
