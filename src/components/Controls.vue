@@ -5,7 +5,7 @@
         Observatory
       </h1>
       <div>
-        <button v-for="preset in presets" @click="$emit('apply-preset', preset.payload)">{{ preset.name }}</button>
+        <button v-for="preset in presets" @click="$emit('apply-preset', preset.payload)" v-bind:key="preset.name">{{ preset.name }}</button>
       </div>
       <ul>
         <li><label>Latitude</label><input v-model.number="plan.observatory.latitude"></li>

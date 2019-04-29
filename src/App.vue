@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <div id="preview">
-     <detector-plot></detector-plot>
+     <detector-plot v-bind:plan="plan"></detector-plot>
     </div>
     <div id="controls">
       <controls
@@ -63,12 +63,24 @@ Vue.use((Vue) => {
     // Emit the event on all parent components
     let component = this;
     do {
-      console.log(args);
       component.$emit(eventName, ...args);
       component = component.$parent;
     } while (component);
   };
 });
+
+function nextUnusedCompanionId(companions) {
+  let ids = companions.map((value) => value.id);
+  let id = 0;
+  while (ids.includes(id)){
+    id++;
+  }
+  return id;
+}
+
+function companionIdToIndex(companionId, companions) {
+  return Array.from(companions).findIndex((companion) => companion.id == companionId);
+}
 
 
 export default {
@@ -81,18 +93,20 @@ export default {
       this.patchPlan(this.plan, presetData)
     },
     appendCompanion: function () {
-      console.log("Add companion...");
-      this.plan.companions.push({separation: 1, pa: 0});
+      this.plan.companions.push({id: nextUnusedCompanionId(this.plan.companions), separation: 1, pa: 0});
     },
-    removeCompanion: function (index) {
-      console.log("Remove companion at...", index);
-      this.plan.companions.splice(index, 1);
+    removeCompanion: function (companionId) {
+      let index = companionIdToIndex(companionId, this.plan.companions);
+      if (index > -1) {
+        this.plan.companions.splice(index, 1);
+      } else {
+        console.error("Missing companion?");
+      }
     },
     updateFromHash: function () {
       if (window.location.hash.length > 1) {
         let injectPlan = JSON.parse(decodeURIComponent(window.location.hash.slice(1)));
         this.patchPlan(this.plan, injectPlan);
-        console.log(this.plan);
       }
     },
     patchPlan: function patchPlan(plan, planPatch) {
