@@ -23,8 +23,9 @@
       </h1>
       <ul>
         <li><label>Coronagraph style</label><select><option>gvAPP 180</option><option>gvAPP 360</option></select></li>
-        <li><label>Inner working angle</label><div><input> &lambda; / D</div></li>
-        <li><label>Outer working angle</label><div><input> &lambda; / D</div></li>
+        <li><label>Inner working angle</label><div><input v-model.number="plan.observation.coronagraph.iwa_lambdaOverD"> &lambda; / D</div></li>
+        <li><label>Outer working angle</label><div><input v-model.number="plan.observation.coronagraph.owa_lambdaOverD"> &lambda; / D</div></li>
+        <li><label>Center wavelength</label><div><input v-model.number="plan.observation.coronagraph.centerWavelength_um"> &mu;m</div></li>
       </ul>
       </div>
   <div id="target">

@@ -125,30 +125,38 @@ export default {
     }
   },
   data: function () {
+    let currentDateStamp = DateTime.local().toISODate();
     return {
-      plan: {
-        observatory: {
-          latitude: 0,
-          longitude: 0,
-          timeZone: 'America/Santiago'
+      "plan": {
+        "observatory": {
+          "latitude": -29.0146,
+          "longitude": -70.6926,
+          "timeZone": "America/Santiago"
         },
-        observation: {
-          date: {year: 2019, month: 1, day: 1},
-          coronagraph: {
-            name: "gvAPP 180",
-            iwa: 2,
-            owa: 7,
-            offset: 1.793212
+        "observation": {
+          "date": currentDateStamp,
+          "coronagraph": {
+            "name": "gvAPP 180",
+            "iwa_lambdaOverD": 2,
+            "owa_lambdaOverD": 7,
+            "centerWavelength_um": 3.9,
+            "offset_lambdaOverD": 1.793212
           }
         },
-        target: {
-          identifier: "",
-          ra: 0,
-          dec: 0
+        "target": {
+          "identifier": "51 Eri",
+          "ra": 69.40055129919459,
+          "dec": -1.526450325851111
         },
-        companions: []
+        "companions": [
+          {
+            "id": 0,
+            "separation": 0.449,
+            "pa": 170
+          }
+        ]
       }
-    }
+    };
   }
 }
 </script>
