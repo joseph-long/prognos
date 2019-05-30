@@ -42,6 +42,8 @@ html, body {
 
 input {
   font-size: inherit;
+  border: 1px solid #ccc;
+  padding: 2px;
 }
 ul { padding: 0}
 li {
@@ -57,6 +59,7 @@ import Controls from "./components/Controls.vue";
 import DetectorPlot from "./components/DetectorPlot.vue";
 import { DateTime } from 'luxon';
 import Vue from 'vue';
+import 'normalize.css/normalize.css';
 
 Vue.use((Vue) => {
   Vue.prototype.$bubble = function $bubble(eventName, ...args) {
