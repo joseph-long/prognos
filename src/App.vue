@@ -26,6 +26,8 @@ html, body {
 
 #preview {
   flex: 1;
+  width: 50vw;
+  overflow: scroll;
   background-color: gray;
 }
 
@@ -128,7 +130,7 @@ export default {
     }
   },
   data: function () {
-    let currentDateStamp = DateTime.local().toISODate();
+    let currentDate = DateTime.local(); //.toISODate();
     return {
       "plan": {
         "observatory": {
@@ -137,7 +139,7 @@ export default {
           "timeZone": "America/Santiago"
         },
         "observation": {
-          "date": currentDateStamp,
+          "date": {year: currentDate.year, month: currentDate.month, day: currentDate.day},
           "coronagraph": {
             "name": "gvAPP 180",
             "iwa_lambdaOverD": 2,
