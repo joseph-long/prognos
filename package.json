@@ -10,7 +10,7 @@
   "dependencies": {
     "@tensorflow/tfjs": "^1.1.0",
     "astronomical-algorithms": "^0.5.8",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "luxon": "^1.12.1",
     "normalize.css": "^8.0.1",
